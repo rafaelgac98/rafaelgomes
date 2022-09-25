@@ -3,13 +3,12 @@
         <div align="center">
             <table border="1" >
                 <h2>Veja os itens no banco de dados</h2>
-                <tr><td><b>Nomes</b></td><td><b>CPF</b></td><td><b>Endereco</b></td></tr>
+                <tr><td><b>Nomes</b></td><td><b>User</b></td></tr>
                 {% for item in datas %}
 
                 <tr>
                     <td>{{item[0]}}</td>
                     <td>{{item[1]}}</td>
-                    <td>{{item[2]}}</td>
                 </tr>
                 {% endfor %}
             </table>
