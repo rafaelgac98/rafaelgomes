@@ -1,7 +1,7 @@
 web:
   build: .
   working_dir: /data
-  command: python app2.py
+  command: python aulamvc.py
   links:
     - db
   volumes:
@@ -12,6 +12,6 @@ web:
 db:
   image: mysql:5.7
   environment:
-      MYSQL_ROOT_PASSWORD: mudar123
+      MYSQL_ROOT_PASSWORD: 123456
   ports:
     - "3309:3309"
