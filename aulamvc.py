@@ -9,7 +9,7 @@ app = Flask(__name__)
 #MySQL configurations
 app.config['MYSQL_DATABASE_USER'] = 'root'
 app.config['MYSQL_DATABASE_PASSWORD'] = '123456'
-app.config['MYSQL_DATABASE_DB'] = 'db'
+app.config['MYSQL_DATABASE_DB'] = 'bd'
 app.config['MYSQL_DATABASE_HOST'] = '172.17.0.2'
 mysql.init_app(app)
 
@@ -17,27 +17,26 @@ mysql.init_app(app)
 def main():
     return render_template('aulamvc.html')
 
-@app.route('/gravar', methods=['POST', 'GET'])
+@app.route('/gravar', methods=['POST','GET'])
 def gravar():
-    nome = request.form['nome']
-    username = request.form['cpf']
-    password = request.form['endereco']
-
-    if nome and cpf and endereco:
-        conn = mysql.connect()
-        cursor = conn.cursor()
-        cursor.execute('insert into tbl_user (user_name, user_username, user_password) VALUES (%s,%s,%s)', (nome, username, password))
-        conn.commit()
-    return render_template('aulamvc.html')
+  nome = request.form['nome']
+  email = request.form['email']
+  senha = request.form['senha']
+  if nome and email and senha:
+    conn = mysql.connect()
+    cursor = conn.cursor()
+    cursor.execute('insert into tbl_user (user_name, user_username, user_password) VALUES (%s, %s, %s)', (nome, email, senha))
+    conn.commit()
+  return render_template('aulamvc.html')
 
 @app.route('/listar', methods=['POST','GET'])
 def listar():
-    conn = mysql.connect()
-    cursor = conn.cursor()
-    cursor.execute('select user_name, user_username from tbl_user')
-    data = cursor.fetchall()
-    conn.commit()
-    return render_template('lista.html', datas=data)
+  conn = mysql.connect()
+  cursor = conn.cursor()
+  cursor.execute('select user_name, user_username, user_password from tbl_user')
+  data = cursor.fetchall()
+  conn.commit()
+  return render_template('lista.html', datas=data)
 
 
 if __name__ == "__main__":
